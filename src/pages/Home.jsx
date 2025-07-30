@@ -1,11 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import Nav from '../components/Nav'
 import Categories from '../Category'
 import Card from '../components/Card'
 import {food_items} from '../food'
+import { dataContext } from '../context/UserContext'
 
 const Home = () => {
-  const [filteredItems, setFilteredItems] = useState(food_items)
+  const {filteredItems, setFilteredItems, input} = useContext(dataContext)
 
   const handleFilter = (category)=>{
     if(category==='All')
@@ -16,6 +17,7 @@ const Home = () => {
   return (
     <div className='w-full bg-slate-200 min-h-screen'>
         <Nav />
+        {!input?
         <div className='flex justify-center items-center flex-wrap gap-5 w-[100%]'>
           {
             Categories.map(category=>{
@@ -28,7 +30,8 @@ const Home = () => {
               </div>
             })
           }
-        </div>
+        </div>:null
+        }
         <div className='w-full flex flex-wrap px-5 gap-5 justify-center items-center py-8'>
           {filteredItems.map(item=>(
             <Card name={item.food_name} image={item.food_image} id={item.id} price={item.price} type={item.food_type} />
