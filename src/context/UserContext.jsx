@@ -4,13 +4,16 @@ import { food_items } from '../food'
 export const dataContext = createContext()
 
 const UserContext = ({children}) => {
-    const [filteredItems, setFilteredItems] = useState(food_items)
+    let [filteredItems, setFilteredItems] = useState(food_items)
     let [input, setInput] = useState("")
+    let [showCart, setShowCart] = useState(false)
     let data = {
         input,
         setInput,
         filteredItems,
-        setFilteredItems
+        setFilteredItems,
+        showCart,
+        setShowCart
     }
   return (
     <div>

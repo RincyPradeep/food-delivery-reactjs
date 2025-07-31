@@ -4,9 +4,11 @@ import Categories from '../Category'
 import Card from '../components/Card'
 import {food_items} from '../food'
 import { dataContext } from '../context/UserContext'
+import { RxCross2 } from "react-icons/rx";
+import CartCard from '../components/CartCard'
 
 const Home = () => {
-  const {filteredItems, setFilteredItems, input} = useContext(dataContext)
+  const {filteredItems, setFilteredItems, input, showCart, setShowCart} = useContext(dataContext)
 
   const handleFilter = (category)=>{
     if(category==='All')
@@ -37,6 +39,20 @@ const Home = () => {
             <Card name={item.food_name} image={item.food_image} id={item.id} price={item.price} type={item.food_type} />
           ))}
         </div>
+
+        {/* cart modal */}
+        {
+          showCart &&
+          <div className={`w-full md:w-[40vw] h-[100%] top-0 right-0 bg-white fixed shadow-xl p-6 transition-all duration-500
+            ${showCart?"translate-x-0":"translate-x-full"}`}>
+            <header className='w-[100%] flex justify-between items-center'>
+              <span className='text-green-400 text-[18px] font-semibold'>Order items</span>
+              <RxCross2 className='w-[30px] h-[30px] text-green-400 text-[18px] font-semibold cursor-pointer hover:text-gray-600' 
+               onClick={()=>setShowCart(false)}/>
+            </header>
+            <CartCard />
+          </div>
+        }
     </div>
   )
 }

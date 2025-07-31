@@ -7,7 +7,7 @@ import { food_items } from '../food';
 
 
 const Nav = () => {
-  let {input, setInput, filteredItems,setFilteredItems} = useContext(dataContext)
+  let {input, setInput, filteredItems,setFilteredItems, setShowCart} = useContext(dataContext)
 
   useEffect(() => {
     setFilteredItems(food_items.filter(item=>item.food_name.includes(input)|| item.food_name.toLowerCase().includes(input)))
@@ -30,7 +30,8 @@ const Nav = () => {
               value={input}
             />
         </form>
-        <div className='w-[60px] h-[60px] bg-white flex justify-center items-center rounded-md shadow-xl relative'>
+        <div className='w-[60px] h-[60px] bg-white flex justify-center items-center rounded-md shadow-xl relative cursor-pointer'
+         onClick={()=>setShowCart(true)}>
             <span className='absolute top-0 right-2 text-green-500 font-bold text-[18px]'>0</span>
             <LuShoppingBag className='w-[30px] h-[30px] text-green-500' />
         </div>
