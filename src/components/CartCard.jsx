@@ -2,7 +2,7 @@ import React from 'react'
 import image1 from '../assets/image1.avif'
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch } from 'react-redux';
-import { RemoveItem } from '../redux/cartSlice';
+import { RemoveItem, IncrementQty, DecrementQty } from '../redux/cartSlice';
 
 
 const CartCard = ({item}) => {
@@ -20,9 +20,12 @@ const CartCard = ({item}) => {
                 <div className='w-[90%] h-[50px] flex rounded-lg overflow-hidden shadow-lg
                  text-green-400 font-semibold border-2 border-green-400 text-xl'
                 >
-                    <button className='w-[30%] h-full bg-white flex justify-center items-center hover:bg-gray-200'>-</button>
+                    <button className='w-[30%] h-full bg-white flex justify-center items-center hover:bg-gray-200'
+                        onClick={()=>item.qty>1? dispatch(DecrementQty(item.id)): 1}
+                    >-</button>
                     <span className='w-[40%] h-full bg-slate-200 flex justify-center items-center'>{item.qty}</span>
-                    <button className='w-[30%] h-full bg-white flex justify-center items-center hover:bg-gray-200'>+</button>
+                    <button className='w-[30%] h-full bg-white flex justify-center items-center hover:bg-gray-200'
+                            onClick={()=>dispatch(IncrementQty(item.id))}>+</button>
                 </div>
             </div>
         </div>
