@@ -7,6 +7,7 @@ import { dataContext } from '../context/UserContext'
 import { RxCross2 } from "react-icons/rx";
 import CartCard from '../components/CartCard'
 import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify';
 
 
 const Home = () => {
@@ -95,7 +96,9 @@ const Home = () => {
                   <span className='text-2xl text-gray-600 font-semibold'>Total</span>
                   <span className='text-2xl text-green-400 font-semibold'>Rs.{total}/-</span>
                 </div>
-                <button className='w-[80%] p-3 bg-green-400 text-white rounded-lg hover:bg-green-500 transition-all'>Place Order</button>
+                <button className='w-[80%] p-3 bg-green-400 text-white rounded-lg hover:bg-green-500 transition-all'
+                  onClick={()=>toast.success("Order placed")}
+                >Place Order</button>
               </>
               :<div className='text-center text-2xl text-green-500 font-semibold mt-5'>Cart is empty</div>
             }
